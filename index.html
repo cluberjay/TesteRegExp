@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width , initial-scale=1.0">
+      <meta http-equiv="X-UA-compatible" content="IE=edge">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+      <title>Exercicios de RegExp</title>
+      <style>
+        body {
+          background-color: #000;
+        }
+
+        * {
+          font-family: Arial, Helvetica, sans-serif;
+        }
+
+        header {
+          margin: auto;
+          margin-top: 1rem;
+          max-width: fit-content;
+          text-align: center;
+        }
+
+        #link-da-documentacao {
+          position: absolute;
+          top: 2rem;
+          left: 1rem;
+          text-decoration: none;
+          font-size: small;
+        }
+
+        #link-da-documentacao:hover {
+          color: red;
+        }
+
+        h1 , label {
+          color: red;
+          
+        }
+
+        #link-da-documentacao , p , var  {
+          color: #fff;
+        }
+
+        button {
+          color: #000;
+          border-radius: 25px;
+          border: none;
+        }
+
+        #formulario {
+          display: grid;
+          grid-template-columns: repeat(3 , .5fr);
+          gap:50px 50px;
+          width: fit-content;
+          margin: auto;
+          margin-top: 2rem;
+          margin-bottom: 3rem;
+        }
+
+        .itens-form button {
+          margin-top: 15px;
+        }
+        
+        .estilo-dos-itens-do-formulario {
+          margin-top: 4rem;
+          margin-bottom: 1rem;
+        }
+
+        footer {
+          margin-top: 5rem;
+          margin-right: auto;
+          margin-left: auto;
+          margin-bottom: 5rem;
+          border-top: 2px solid #fff;
+        }
+
+        li {
+          margin-top: 3rem;
+          line-height:1.5rem;
+        }
+
+        .link-do-github , #msg-ao-leitor {
+          
+          color: #fff;
+          text-decoration: none;
+        }
+
+        .link-do-github {
+          padding-left: 5px;
+        }
+
+        .link-do-github:hover {
+          color: red;
+        }
+
+        .bi {
+          margin-left: 2.5px;
+          color: #fff;
+        }
+
+        #msg-ao-leitor {
+          list-style: none;
+          font-size: medium;
+        }
+      </style>
+     
+   </head> 
+   
+   <body>
+      
+      <header>
+        <a href="https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/RegExp" target="_blank" id="link-da-documentacao">Documentção RegExp Mdn Web Docs</a>
+        <h1>Epressões Regulares</h1>
+        <p>Digite o(s) caractere(s) que correspondem aos padrões em seus respectivos campos.</p>
+      </header>
+      
+      <form id="formulario">
+        
+        <div class="itens-form">
+           <label for="scape" class="estilo-dos-itens-do-formulario">/\d/</label>
+           <input type="text" id="scape" >
+           <button type="button" id="botao1">Verificar</button>
+           <var id="resultScape" ></var>
+        </div>
+        
+        <div class="itens-form">
+           <label for="circunflexo" class="estilo-dos-itens-do-formulario">/^A/</label>
+           <input type="text" id="circunflexo">
+           <button type="button" id="botao2">Verificar</button>
+           <var id="resultCircunflexo"></var>
+        </div>
+
+        <div class="itens-form">
+           <label for="cifao" class="estilo-dos-itens-do-formulario">/uro$/</label>
+           <input type="text" id="cifao">
+           <button type="button" id="botao3">Verificar</button>
+           <var id="resultCifao"></var>
+        </div>
+
+        <div class="itens-form">
+           <label for="asterisco" class="estilo-dos-itens-do-formulario">/\d+.*/</label>
+           <input type="text" id="asterisco">
+           <button type="button" id="botao4">Verificar</button>
+           <var id="resultAsterisco"></var>
+        </div>
+
+        <div class="itens-form">
+           <label for="plus" class="estilo-dos-itens-do-formulario">/erd+/</label>
+           <input type="text" id="plus">
+           <button type="button" id="botao5">Verificar</button>
+           <var id="resultPlus"></var>
+        </div>
+
+        <div class="itens-form">
+           <label for="ponto" class="estilo-dos-itens-do-formulario">/./</label>
+           <input type="text" id="ponto">
+           <button type="button" id="botao6">Verificar</button>
+           <var id="resultPonto"></var>
+        </div>
+
+        <div class="itens-form">
+           <label for="interrogacao" class="estilo-dos-itens-do-formulario">/erd?/</label>
+           <input type="text" id="interrogacao">
+           <button type="button" id="botao7">Verificar</button>
+           <var id="resulInterrogacao"></var>
+        </div>
+
+        <div class="itens-form">
+           <label for="parenteses" class="estilo-dos-itens-do-formulario">/(x) (y) \1 \2/</label>
+           <input type="text" id="parenteses">
+           <button type="button" id="botao8">Verificar</button>
+           <var id="resultParenteses"></var>
+        </div>
+
+        <div class="itens-form">
+           <label for="parentnaocaptura" class="estilo-dos-itens-do-formulario">/(?:foo){1,2}/</label>
+           <input type="text" id="parentnaocaptura">
+           <button type="button" id="botao9">Verificar</button>
+           <var id="resultParentNaoCaptura"></var>
+        </div>
+
+       <div class="itens-form">
+           <label for="lookahead" class="estilo-dos-itens-do-formulario">/(x(?= y| z))/</label>
+           <input type="text" id="lookahead">
+           <button type="button" id="botao10">Verificar</button>
+           <var id="resultLookahead"></var>
+        </div>
+
+        <div class="itens-form">
+           <label for="notlooahead" class="estilo-dos-itens-do-formulario">/x(?!\.)/</label>
+           <input type="text" id="notlooahead">
+           <button type="button" id="botao11">Verificar</button>
+           <var id="resultNotLookahead"></var>
+        </div>
+
+        <div class="itens-form">
+           <label for="conjuntos" class="estilo-dos-itens-do-formulario">/[a-zA-Z]/</label>
+           <input type="text" id="conjuntos">
+           <button type="button" id="botao12">Verificar</button>
+           <var id="resultConjuntos"></var>
+        </div>
+
+        <div class="itens-form">
+           <label for="ou" class="estilo-dos-itens-do-formulario">/x|y/</label>
+           <input type="text" id="ou">
+           <button type="button" id="botao13">Verificar</button>
+           <var id="resultOu"></var>
+        </div>
+
+        <div class="itens-form">
+           <label for="precisao" class="estilo-dos-itens-do-formulario">/a{1,2}/</label>
+           <input type="text" id="precisao">
+           <button type="button" id="botao14">Verificar</button>
+           <var id="resultPrecisao"></var>
+        </div>
+
+        <div class="itens-form">
+           <label for="not" class="estilo-dos-itens-do-formulario">/[^\d]/</label>
+           <input type="text" id="not">
+           <button type="button" id="botao15">Verificar</button>
+           <var id="resultNot"></var>
+        </div>
+
+        <div class="itens-form">
+           <label for="espaco-em-branco" class="estilo-dos-itens-do-formulario">/[\b]/</label>
+           <input type="text" id="espaco-em-branco">
+           <button type="button" id="botao16">Verificar</button>
+           <var id="resultEspacoBranco"></var>
+        </div>
+
+        <div class="itens-form">
+           <label for="fronteira-de-caractere" class="estilo-dos-itens-do-formulario">/\b[A-Z]\b/</label>
+           <input type="text" id="fronteira-de-caractere">
+           <button type="button" id="botao17">Verificar</button>
+           <var id="resultFrontCaractere"></var>
+        </div>
+
+        <div class="itens-form">
+           <label for="notFronteira" class="estilo-dos-itens-do-formulario">/\B/</label>
+           <input type="text" id="notFronteira">
+           <button type="button" id="botao18">Verificar</button>
+           <var id="resultNotFront"></var>
+        </div>
+
+        <div class="itens-form">
+           <label for="c" class="estilo-dos-itens-do-formulario">/[cM/</label>
+           <input type="text" id="c">
+           <button type="button" id="botao19">Verificar</button>
+           <var id="resultC"></var>
+        </div>
+
+        <div class="itens-form">
+           <label for="D" class="estilo-dos-itens-do-formulario">/\D/</label>
+           <input type="text" id="D">
+           <button type="button" id="botao20">Verificar</button>
+           <var id="resultD"></var>
+        </div>
+
+        <div class="itens-form">
+           <label for="f" class="estilo-dos-itens-do-formulario">/\f/</label>
+           <input type="text" id="f">
+           <button type="button" id="botao21">Verificar</button>
+           <var id="resultF"></var>
+        </div>
+
+        <div class="itens-form">
+           <label for="n" class="estilo-dos-itens-do-formulario">/\n/</label>
+           <input type="text" id="n">
+           <button type="button" id="botao22">Verificar</button>
+           <var id="resultN"></var>
+        </div>
+
+        <div class="itens-form">
+           <label for="r" class="estilo-dos-itens-do-formulario">/\r/</label>
+           <input type="text" id="r">
+           <button type="button" id="botao23">Verificar</button>
+           <var id="resultR"></var>
+        </div>
+
+        <div class="itens-form">
+           <label for="s" class="estilo-dos-itens-do-formulario">/\s/</label>
+           <input type="text" id="s">
+           <button type="button" id="botao24">Verificar</button>
+           <var id="resultS"></var>
+        </div>
+
+        <div class="itens-form">
+           <label for="S" class="estilo-dos-itens-do-formulario">/\S/</label>
+           <input type="text" id="S">
+           <button type="button" id="botao25">Verificar</button>
+           <var id="resultS1"></var>
+        </div>
+
+        <div class="itens-form">
+           <label for="t" class="estilo-dos-itens-do-formulario">/\t/</label>
+           <input type="text" id="t">
+           <button type="button" id="botao26">Verificar</button>
+           <var id="resultT"></var>
+        </div>
+
+        <div class="itens-form">
+           <label for="v" class="estilo-dos-itens-do-formulario">/\v/</label>
+           <input type="text" id="v">
+           <button type="button" id="botao27">Verificar</button>
+           <var id="resultV"></var>
+        </div>
+
+        <div class="itens-form">
+           <label for="w" class="estilo-dos-itens-do-formulario">/\w/</label>
+           <input type="text" id="w">
+           <button type="button" id="botao28">Verificar</button>
+           <var id="resultW"></var>
+        </div>
+
+        <div class="itens-form">
+           <label for="W" class="estilo-dos-itens-do-formulario">/\W/</label>
+           <input type="text" id="W">
+           <button type="button" id="botao29">Verificar</button>
+           <var id="resultW1"></var>
+        </div>
+
+        <div class="itens-form">
+           <label for="num" class="estilo-dos-itens-do-formulario">/\num/</label>
+           <input type="text" id="num">
+           <button type="button" id="botao30">Verificar</button>
+           <var id="resultNum"></var>
+        </div>
+
+        <div class="itens-form">
+           <label for="zero" class="estilo-dos-itens-do-formulario">/\0/</label>
+           <input type="text" id="zero">
+           <button type="button" id="botao31">Verificar</button>
+           <var id="resultZero"></var>
+        </div>
+
+        <div class="itens-form">
+           <label for="xhh" class="estilo-dos-itens-do-formulario">/\xhh/</label>
+           <input type="text" id="xhh">
+           <button type="button" id="botao32">Verificar</button>
+           <var id="resultXhh"></var>
+        </div>
+
+        <div class="itens-form">
+           <label for="uhhh" class="estilo-dos-itens-do-formulario">/\uhhh/</label>
+           <input type="text" id="uhhh">
+           <button type="button" id="botao33">Verificar</button>
+           <var id="resultUhhh"></var>
+        </div>
+
+      </form>
+
+      <footer>
+        
+        <ul>
+          
+          <li id="msg-ao-leitor"><i class="bi bi-chat-text"></i>  Oi ! Eu sou o Júlio , estudante de desenvolvimento Web.Espero ajudar com a disponibilização desse projeto aos estudantes que queiram praticar RegExp.</li>
+          
+          <li><i class="bi bi-github"></i><a href="https://github.com/cluberjay" target="_blank" class="link-do-github">Perfil do GitHub.</a></li>
+
+          <li><i class="bi bi-code-square"></i><a href="https://github.com/cluberjay/Exercicio-RegExp" class="link-do-github" target="_blank">Código do projeto.</a></li>
+        
+        </ul>
+
+      </footer>
+
+      <script>
+         
+         let input
+         let regExp 
+         
+         const barraInvertida = /\d+/
+         const botaoBarra = document.querySelector('#botao1')
+
+         const circunflexo = /^A/
+         const botao2 = document.querySelector('#botao2')
+
+         const cifao = /uro$/
+         const botao3 = document.querySelector('#botao3')
+
+         const asterisco = /\d+.*/
+         const botao4 = document.querySelector('#botao4')
+
+         const plus = /erd+/
+         const botao5 = document.querySelector('#botao5')
+
+         const ponto = /./
+         const botao6 = document.querySelector('#botao6')
+         
+         const interrogacao = /erd?/
+         const botao7 = document.querySelector('#botao7')
+
+         const parenteses = /(x) (y) \1 \2/
+         const botao8 = document.querySelector('#botao8')
+
+         const parenteNaoCaptura = /(?:foo){1,2}/
+         const botao9 = document.querySelector('#botao9')
+
+         const lookahead = /x(?=y)/
+         const botao10 = document.querySelector('#botao10')
+
+         const notlooahead = /x(?!\.)/
+         const botao11 = document.querySelector('#botao11')
+
+         const conjuntos = /[a-zA-Z]/
+         const botao12 = document.querySelector('#botao12')
+         
+         const ou = /x|y/
+         const botao13 = document.querySelector('#botao13')
+
+         const precisao = /a{1,2}/
+         const botao14 = document.querySelector('#botao14')
+         
+         const not = /[^\d]/
+         const botao15 = document.querySelector('#botao15')
+         
+         const b = /[\b]/
+         const botao16 = document.querySelector('#botao16')
+         
+         const fronteira = /\b[A-Z]\b/
+         const botao17 = document.querySelector('#botao17')
+         
+         const notFronteira= /\B/
+         const botao18 = document.querySelector('#botao18')
+         
+         const c = /\c/
+         const botao19 = document.querySelector('#botao19')
+         
+         const D = /\D/
+         const botao20 = document.querySelector('#botao20')
+         
+         const f = /\f/
+         const botao21 = document.querySelector('#botao21')
+         
+         const n = /\n/
+         const botao22 = document.querySelector('#botao22')
+         
+         const r = /\r/
+         const botao23 = document.querySelector('#botao23')
+         
+         const s = /\s/
+         const botao24 = document.querySelector('#botao24')
+         
+         const S = /\S/
+         const botao25 = document.querySelector('#botao25')
+         
+         const t = /\t/
+         const botao26 = document.querySelector('#botao26')
+         
+         const v = /\v/
+         const botao27 = document.querySelector('#botao27')
+         
+         const w = /\w/
+         const botao28 = document.querySelector('#botao28')
+         
+         const W = /\W/
+         const botao29 = document.querySelector('#botao29')
+         
+         const num = /\num/
+         const botao30 = document.querySelector('#botao30')
+         
+         const zero = /\0/
+         const botao31 = document.querySelector('#botao31')
+         
+         const xhh = /\xhh/
+         const botao32 = document.querySelector('#botao32')
+         
+         const uhhh = /\uhhh/
+         const botao33 = document.querySelector('#botao33')
+         
+         
+      botaoBarra.addEventListener('click' , ()=>{
+        
+           input = document.querySelector('#scape').value
+           regExp = barraInvertida.test(input)
+           console.log(regExp)
+
+          if(regExp == true) {
+            document.querySelector('#resultScape').innerHTML = 'true'
+          } else {
+            document.querySelector('#resultScape').innerHTML = 'false'
+          }
+           
+        })
+
+      botao2.addEventListener('click' , ()=>{
+        
+           input = document.querySelector('#circunflexo').value
+           regExp = circunflexo.test(input)
+           console.log(regExp)
+
+          if(regExp == true) {
+            document.querySelector('#resultCircunflexo').innerHTML = 'true'
+          } else {
+            document.querySelector('#resultCircunflexo').innerHTML = 'false'
+          }
+          
+        })
+     
+      
+      botao3.addEventListener('click' , ()=>{
+        
+           input = document.querySelector('#cifao').value
+           regExp = cifao.test(input)
+           console.log(regExp)
+
+          if(regExp == true) {
+            document.querySelector('#resultCifao').innerHTML = 'true'
+          } else {
+            document.querySelector('#resultCifao').innerHTML = 'false'
+          }
+           
+        })  
+           
+      
+      botao4.addEventListener('click' , ()=> {
+        input = document.querySelector('#asterisco').value
+        regExp = asterisco.test(input)
+
+        if(regExp == true){
+          document.querySelector('#resultAsterisco').innerHTML = 'true'
+        } else {
+          document.querySelector('#resultAsterisco').innerHTML = 'false'
+        }
+      
+      })     
+  
+      botao5.addEventListener('click' , ()=>{
+        
+        input = document.querySelector('#plus').value
+        regExp = plus.test(input)
+        console.log(regExp)
+
+       if(regExp == true) {
+         document.querySelector('#resultPlus').innerHTML = 'true'
+       } else {
+         document.querySelector('#resultPlus').innerHTML = 'false'
+       }
+       
+       })  
+
+       botao6.addEventListener('click' , ()=>{
+        
+        input = document.querySelector('#ponto').value
+        regExp = ponto.test(input)
+        console.log(regExp)
+
+       if(regExp == true) {
+         document.querySelector('#resultPonto').innerHTML = 'true'
+       } else {
+         document.querySelector('#resultPonto').innerHTML = 'false'
+       }
+       
+       }) 
+
+       botao7.addEventListener('click' , ()=>{
+        
+        input = document.querySelector('#interrogacao').value
+        regExp = interrogacao.test(input)
+
+       if(regExp == true) {
+         document.querySelector('#resulInterrogacao').innerHTML = 'true'
+       } else {
+         document.querySelector('#resulInterrogacao').innerHTML = 'false'
+       }
+       
+       })
+       
+       botao8.addEventListener('click' , ()=>{
+        
+        input = document.querySelector('#parenteses').value
+        regExp = parenteses.test(input)
+        console.log(regExp)
+
+       if(regExp == true) {
+         document.querySelector('#resultParenteses').innerHTML = 'true'
+       } else {
+         document.querySelector('#resultParenteses').innerHTML = 'false'
+       }
+       
+       })
+
+       botao9.addEventListener('click' , ()=>{
+        
+        input = document.querySelector('#parentnaocaptura').value
+        regExp = parenteNaoCaptura.test(input)
+
+       if(regExp == true) {
+         document.querySelector('#resultParentNaoCaptura').innerHTML = 'true'
+       } else {
+         document.querySelector('#resultParentNaoCaptura').innerHTML = 'false'
+       }
+       
+       })
+
+       botao10.addEventListener('click' , ()=>{
+        
+        input = document.querySelector('#lookahead').value
+        regExp =  lookahead.test(input)
+
+       if(regExp == true) {
+         document.querySelector('#resultLookahead').innerHTML = 'true'
+       } else {
+         document.querySelector('#resultLookahead').innerHTML = 'false'
+       }
+       
+       })
+       
+       botao11.addEventListener('click' , ()=>{
+        
+        input = document.querySelector('#notlooahead').value
+        regExp = notlooahead .test(input)
+
+       if(regExp == true) {
+         document.querySelector('#resultNotLookahead').innerHTML = 'true'
+       } else {
+         document.querySelector('#resultNotLookahead').innerHTML = 'false'
+       }
+       
+       })
+
+       botao12.addEventListener('click' , ()=>{
+        
+        input = document.querySelector('#conjuntos').value
+        regExp = conjuntos.test(input)
+
+       if(regExp == true) {
+         document.querySelector('#resultConjuntos').innerHTML = 'true'
+       } else {
+         document.querySelector('#resultConjuntos').innerHTML = 'false'
+       }
+       
+       })
+
+       botao13.addEventListener('click' , ()=>{
+        
+        input = document.querySelector('#ou').value
+        regExp = ou.test(input)
+
+       if(regExp == true) {
+         document.querySelector('#resultOu').innerHTML = 'true'
+       } else {
+         document.querySelector('#resultOu').innerHTML = 'false'
+       }
+       
+       })
+
+       botao14.addEventListener('click' , ()=>{
+        
+        input = document.querySelector('#precisao').value
+        regExp = precisao.test(input)
+
+       if(regExp == true) {
+         document.querySelector('#resultPrecisao').innerHTML = 'true'
+       } else {
+         document.querySelector('#resultPrecisao').innerHTML = 'false'
+       }
+       
+       })
+
+       botao15.addEventListener('click' , ()=>{
+        
+        input = document.querySelector('#not').value
+        regExp = not.test(input)
+
+       if(regExp == true) {
+         document.querySelector('#resultNot').innerHTML = 'true'
+       } else {
+         document.querySelector('#resultNot').innerHTML = 'false'
+       }
+       
+       })
+
+       botao16.addEventListener('click' , ()=>{
+        
+        input = document.querySelector('#espaco-em-branco').value
+        regExp = b.test(input)
+
+       if(regExp == true) {
+         document.querySelector('#resultEspacoBranco').innerHTML = 'true'
+       } else {
+         document.querySelector('#resultEspacoBranco').innerHTML = 'false'
+       }
+       
+       })
+
+       botao17.addEventListener('click' , ()=>{
+        
+        input = document.querySelector('#fronteira-de-caractere').value
+        regExp = fronteira.test(input)
+
+       if(regExp == true) {
+         document.querySelector('#resultFrontCaractere').innerHTML = 'true'
+       } else {
+         document.querySelector('#resultFrontCaractere').innerHTML = 'false'
+       }
+       
+       })
+
+       botao18.addEventListener('click' , ()=>{
+        
+        input = document.querySelector('#notFronteira').value
+        regExp = notFronteira.test(input)
+
+       if(regExp == true) {
+         document.querySelector('#resultNotFront').innerHTML = 'true'
+       } else {
+         document.querySelector('#resultNotFront').innerHTML = 'false'
+       }
+       
+       })
+
+       botao19.addEventListener('click' , ()=>{
+        
+        input = document.querySelector('#c').value
+        regExp = c.test(input)
+
+       if(regExp == true) {
+         document.querySelector('#resultC').innerHTML = 'true'
+       } else {
+         document.querySelector('#resultC').innerHTML = 'false'
+       }
+       
+       })
+
+       botao20.addEventListener('click' , ()=>{
+        
+        input = document.querySelector('#D').value
+        regExp = D.test(input)
+
+       if(regExp == true) {
+         document.querySelector('#resultD').innerHTML = 'true'
+       } else {
+         document.querySelector('#resultD').innerHTML = 'false'
+       }
+       
+       })
+
+       botao21.addEventListener('click' , ()=>{
+        
+        input = document.querySelector('#f').value
+        regExp = f.test(input)
+
+       if(regExp == true) {
+         document.querySelector('#resultF').innerHTML = 'true'
+       } else {
+         document.querySelector('#resultF').innerHTML = 'false'
+       }
+       
+       })
+
+       botao22.addEventListener('click' , ()=>{
+        
+        input = document.querySelector('#n').value
+        regExp = n.test(input)
+
+       if(regExp == true) {
+         document.querySelector('#resultN').innerHTML = 'true'
+       } else {
+         document.querySelector('#resultN').innerHTML = 'false'
+       }
+       
+       })
+
+       botao23.addEventListener('click' , ()=>{
+        
+        input = document.querySelector('#r').value
+        regExp = r.test(input)
+
+       if(regExp == true) {
+         document.querySelector('#resultR').innerHTML = 'true'
+       } else {
+         document.querySelector('#resultR').innerHTML = 'false'
+       }
+       
+       })
+
+       botao24.addEventListener('click' , ()=>{
+        
+        input = document.querySelector('#s').value
+        regExp = s.test(input)
+
+       if(regExp == true) {
+         document.querySelector('#resultS').innerHTML = 'true'
+       } else {
+         document.querySelector('#resultS').innerHTML = 'false'
+       }
+       
+       })
+
+       botao25.addEventListener('click' , ()=>{
+        
+        input = document.querySelector('#S').value
+        regExp = S.test(input)
+
+       if(regExp == true) {
+         document.querySelector('#resultS1').innerHTML = 'true'
+       } else {
+         document.querySelector('#resultS1').innerHTML = 'false'
+       }
+       
+       })
+
+       botao26.addEventListener('click' , ()=>{
+        
+        input = document.querySelector('#t').value
+        regExp = t.test(input)
+
+       if(regExp == true) {
+         document.querySelector('#resultT').innerHTML = 'true'
+       } else {
+         document.querySelector('#resultT').innerHTML = 'false'
+       }
+       
+       })
+
+       botao27.addEventListener('click' , ()=>{
+        
+        input = document.querySelector('#v').value
+        regExp = v.test(input)
+
+       if(regExp == true) {
+         document.querySelector('#resultV').innerHTML = 'true'
+       } else {
+         document.querySelector('#resultV').innerHTML = 'false'
+       }
+       
+       })
+
+       botao28.addEventListener('click' , ()=>{
+        
+        input = document.querySelector('#w').value
+        regExp = w.test(input)
+
+       if(regExp == true) {
+         document.querySelector('#resultW').innerHTML = 'true'
+       } else {
+         document.querySelector('#resultW').innerHTML = 'false'
+       }
+       
+       })
+
+       botao29.addEventListener('click' , ()=>{
+        
+        input = document.querySelector('#W').value
+        regExp = W.test(input)
+
+       if(regExp == true) {
+         document.querySelector('#resultW1').innerHTML = 'true'
+       } else {
+         document.querySelector('#resultW1').innerHTML = 'false'
+       }
+       
+       })
+
+       botao30.addEventListener('click' , ()=>{
+        
+        input = document.querySelector('#num').value
+        regExp = num.test(input)
+
+       if(regExp == true) {
+         document.querySelector('#resultNum').innerHTML = 'true'
+       } else {
+         document.querySelector('#resultNum').innerHTML = 'false'
+       }
+       
+       })
+
+       botao31.addEventListener('click' , ()=>{
+        
+        input = document.querySelector('#zero').value
+        regExp = zero.test(input)
+
+       if(regExp == true) {
+         document.querySelector('#resultZero').innerHTML = 'true'
+       } else {
+         document.querySelector('#resultZero').innerHTML = 'false'
+       }
+       
+       })
+
+       botao32.addEventListener('click' , ()=>{
+        
+        input = document.querySelector('#xhh').value
+        regExp = xhh.test(input)
+
+       if(regExp == true) {
+         document.querySelector('#resultXhh').innerHTML = 'true'
+       } else {
+         document.querySelector('#resultXhh').innerHTML = 'false'
+       }
+       
+       })
+
+       botao33.addEventListener('click' , ()=>{
+        
+        input = document.querySelector('#uhhh').value
+        regExp = uhhh.test(input)
+
+       if(regExp == true) {
+         document.querySelector('#resultUhhh').innerHTML = 'true'
+       } else {
+         document.querySelector('#resultUhhh').innerHTML = 'false'
+       }
+       
+       })
+     
+     
+     </script>
+   </body>
+</html>
