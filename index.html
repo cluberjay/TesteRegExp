@@ -51,8 +51,7 @@
 
         #logoJs {
           position: absolute;
-          top: 7rem;
-          left: 1.5rem;
+          top: 9rem;
           border-radius: 25px;
           width: 100px;
         }
@@ -318,7 +317,7 @@
         </div>
 
         <div class="itens-form">
-           <label for="w" class="estilo-dos-itens-do-formulario">/\w^[""''!@#$%&*()-+=]/</label>
+           <label for="w" class="estilo-dos-itens-do-formulario">/\w[^""''!@]/</label>
            <input type="text" id="w">
            <button type="button" id="botao28">Verificar</button>
            <var id="resultW"></var>
