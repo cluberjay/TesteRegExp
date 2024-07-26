@@ -67,6 +67,11 @@
           margin-bottom: 3rem;
         }
 
+        input {
+          background-color: #5e5252;
+          border-radius: 50px;
+        }
+
         .itens-form button {
           margin-top: 15px;
         }
@@ -150,7 +155,7 @@
         </div>
 
         <div class="itens-form">
-           <label for="asterisco" class="estilo-dos-itens-do-formulario">/\d+.*/</label>
+           <label for="asterisco" class="estilo-dos-itens-do-formulario">/\paciencia*/</label>
            <input type="text" id="asterisco">
            <button type="button" id="botao4">Verificar</button>
            <var id="resultAsterisco"></var>
@@ -318,7 +323,7 @@
         </div>
 
         <div class="itens-form">
-           <label for="w" class="estilo-dos-itens-do-formulario">/\w[^""''!@]/</label>
+           <label for="w" class="estilo-dos-itens-do-formulario">/w/</label>
            <input type="text" id="w">
            <button type="button" id="botao28">Verificar</button>
            <var id="resultW"></var>
@@ -332,7 +337,7 @@
         </div>
 
         <div class="itens-form">
-           <label for="num" class="estilo-dos-itens-do-formulario">/\num/</label>
+           <label for="num" class="estilo-dos-itens-do-formulario">/\./</label>
            <input type="text" id="num">
            <button type="button" id="botao30">Verificar</button>
            <var id="resultNum"></var>
@@ -389,7 +394,7 @@
          const cifao = /uro$/
          const botao3 = document.querySelector('#botao3')
 
-         const asterisco = /\d+.*/
+         const asterisco = /paciencia*/
          const botao4 = document.querySelector('#botao4')
 
          const plus = /erd+/
@@ -461,13 +466,13 @@
          const v = /\v/
          const botao27 = document.querySelector('#botao27')
          
-         const w = /[""''!@#$%&*()-+=]{0}\w/
+         const w = /\w/
          const botao28 = document.querySelector('#botao28')
          
          const W = /\W/
          const botao29 = document.querySelector('#botao29')
          
-         const num = /\num/
+         const num = /\./
          const botao30 = document.querySelector('#botao30')
          
          const zero = /\0/
